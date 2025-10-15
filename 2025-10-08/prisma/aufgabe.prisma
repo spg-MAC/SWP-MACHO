@@ -1,0 +1,38 @@
+model Player {
+    id     Int        @id @default(autoincrement())
+    name   String
+    teamId Int
+    team   Mannschaft @relation(fields: [teamId], references: [id])
+}
+
+model Mannschaft {
+    id       Int      @id @default(autoincrement())
+    name     String
+    players  Player[]
+    matchesA Match[]  @relation("MatchA")
+    matchesB Match[]  @relation("MatchB")
+}
+
+model Match {
+    id            Int        @id @default(autoincrement())
+    stadionId     Int
+    stadion       Stadion    @relation(fields: [stadionId], references: [id])
+    mannschaftAId Int
+    mannschaftA   Mannschaft @relation("MatchA", fields: [mannschaftAId], references: [id])
+    mannschaftBId Int
+    mannschaftB   Mannschaft @relation("MatchB", fields: [mannschaftBId], references: [id])
+    datum         DateTime
+    ergebnis      String
+}
+
+model Stadion {
+    id      Int     @id @default(autoincrement())
+    name    String
+    stadt   String
+    matches Match[]
+}
+
+datasource db {
+    provider = "sqlite"
+    url      = "file:../dev.db"
+}
