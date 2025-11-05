@@ -1,7 +1,5 @@
 {
-    "tasks": {
-        "pg"
-    },
+    
     "imports": {
         "@faker-js/faker": "npm:@faker-js/faker@^10.1.0",
         "@prisma/client": "npm:@prisma/client@^6.16.2",
